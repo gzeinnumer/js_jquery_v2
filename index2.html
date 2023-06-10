@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- letakan css disini -->
+</head>
+<body>
+    
+    <h3>Insert Data</h3>
+
+    <!-- letakan js disini -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"
+        integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+
+    <script>
+        $(function(){
+            //alert('rendered');
+            insertData();
+        });
+
+        function insertData() {
+            var _url = "https://demo-v3-laravelapiv2.gzeinnumer.com/api/examples/insert";
+            /*
+            {
+                "name" : "data 3",
+                "id" : 1,
+            }
+            */
+            var data = { name: "data 3" };
+            $.ajax({
+                url: _url,
+                type: "POST",
+                data: data,
+                dataType: "JSON",
+                success: function (res) {
+                    console.log(res);
+                },
+                error: function (data) {
+                    console.log(data);
+                }
+            });
+        }
+    </script>
+</body>
+</html>

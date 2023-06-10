@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- letakan css disini -->
+</head>
+<body>
+    
+    <h3>List Data All</h3>
+
+    <div id="list"></div>
+
+    <div id="proses"></div>
+
+    <table id="table" border="1"></table>
+
+    <!-- letakan js disini -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"
+        integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+
+    <script>
+        $(function(){
+            //alert('rendered');
+            getAllData();
+        });
+
+        function getAllData() {
+            $('#proses').append('Loading...<br>');
+            var delayInMilliseconds = 2000; //1 second
+
+            setTimeout(function () {
+                var _url = "https://demo-v3-laravelapiv2.gzeinnumer.com/api/examples/all";
+                $.ajax({
+                    url: _url,
+                    method: 'GET',
+                    dataType: 'JSON',
+                    success: function (res) {
+                        $('#proses').append('Loaded...');
+
+                        //console.log(res);
+                        //console.log(res.status);
+                        //console.log(res.title);
+                        //console.log(res.message);
+                        //console.log(res.info.total);
+                        //console.log(res.data[0]);
+                        //console.log(res.data[0].name);
+                        //console.log(res.data.length);
+                        //for(let i=0; i<res.data.length; i++){
+                        //    console.log(res.data[i].id);
+                        //    console.log(res.data[i].name);
+                        //}
+                        //id adalah #
+                        //id="list" adalah #list
+
+                        //for (let i = 0; i < res.data.length; i++) {
+                        //    $('#list').append(res.data[i].name+"_"+res.data[i].id+"<br>");
+                        //}
+
+                        //if(res.status ==1 ){
+                        //    alert("succes dapat data");
+                        //}
+
+                        for (let i = 0; i < res.data.length; i++) {
+                            var element = res.data[i];
+                            $('#table').append(`
+                        <tr>
+                            <td>`+ element.id + `</td>
+                            <td>`+ element.name + `</td>
+                            <td>`+ element.created_at + `</td>
+                        </tr>
+                        `);
+                        }
+                    },
+                    error: function (data) {
+                        console.log(data);
+                    }
+                });
+            }, delayInMilliseconds);
+            
+        }
+    </script>
+</body>
+</html>
